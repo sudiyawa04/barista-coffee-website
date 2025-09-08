@@ -1,9 +1,9 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Menu â€¢ Barista</title>
+    <title>Menu • Barista</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -87,10 +87,14 @@
         .menu-item-image {
             overflow: hidden;
             border-radius: 8px;
+            height: 200px; /* Fixed height for consistency */
         }
         
         .menu-item-image img {
             transition: transform 0.3s ease;
+            width: 100%;
+            height: 200px;
+            object-fit: cover; /* Ensures proper cropping and consistent size */
         }
         
         .menu-item-card:hover .menu-item-image img {
@@ -208,7 +212,7 @@
                          data-src="assets/img/menu/espresso/single-espresso.jpg"
                          data-title="Single Espresso"
                          data-price="KES 200"
-                         data-description="<p>Experience the purest expression of our coffee beans in this classic single shot. Each espresso is carefully extracted using our professional La Marzocco machine, resulting in a concentrated, aromatic cup with a rich crema layer.</p><p><strong>Tasting Notes:</strong></p><ul><li>Rich, bold flavor with hints of dark chocolate</li><li>Smooth finish with subtle caramel undertones</li><li>Perfect crema indicating optimal extraction</li><li>Served at the ideal temperature of 65-70Â°C</li></ul><p>Our baristas ensure each shot is pulled within 25-30 seconds for the perfect balance of strength and flavor.</p>">
+                         data-description="<p>Experience the purest expression of our coffee beans in this classic single shot. Each espresso is carefully extracted using our professional La Marzocco machine, resulting in a concentrated, aromatic cup with a rich crema layer.</p><p><strong>Tasting Notes:</strong></p><ul><li>Rich, bold flavor with hints of dark chocolate</li><li>Smooth finish with subtle caramel undertones</li><li>Perfect crema indicating optimal extraction</li><li>Served at the ideal temperature of 65-70°C</li></ul><p>Our baristas ensure each shot is pulled within 25-30 seconds for the perfect balance of strength and flavor.</p>">
                         <div class="menu-item-image mb-3">
                             <img src="assets/img/menu/espresso/single-espresso.jpg" 
                                  alt="Single Espresso" class="img-fluid rounded">
@@ -218,7 +222,7 @@
                             <span class="price">KES 200</span>
                         </div>
                         <p class="text-secondary small">Pure, concentrated coffee perfection in a small cup</p>
-                        <button class="btn btn-primary btn-sm w-100 mt-2 order-btn" 
+                        <button class="btn btn-gold btn-sm w-100 mt-2 order-btn" 
                                 onclick="orderItem('Single Espresso', 'KES 200'); event.stopPropagation();">
                             <i class="bi bi-cart-plus me-2"></i>Order Now
                         </button>
@@ -239,7 +243,7 @@
                             <span class="price">KES 300</span>
                         </div>
                         <p class="text-secondary small">Double the intensity, double the satisfaction</p>
-                        <button class="btn btn-primary btn-sm w-100 mt-2 order-btn" 
+                        <button class="btn btn-gold btn-sm w-100 mt-2 order-btn" 
                                 onclick="orderItem('Double Espresso', 'KES 300'); event.stopPropagation();">
                             <i class="bi bi-cart-plus me-2"></i>Order Now
                         </button>
@@ -260,7 +264,7 @@
                             <span class="price">KES 280</span>
                         </div>
                         <p class="text-secondary small">Espresso with hot water for a clean, crisp taste</p>
-                        <button class="btn btn-primary btn-sm w-100 mt-2 order-btn" 
+                        <button class="btn btn-gold btn-sm w-100 mt-2 order-btn" 
                                 onclick="orderItem('Americano', 'KES 280'); event.stopPropagation();">
                             <i class="bi bi-cart-plus me-2"></i>Order Now
                         </button>
@@ -281,7 +285,7 @@
                             <span class="price">KES 320</span>
                         </div>
                         <p class="text-secondary small">Espresso "marked" with a dollop of steamed milk foam</p>
-                        <button class="btn btn-primary btn-sm w-100 mt-2 order-btn" 
+                        <button class="btn btn-gold btn-sm w-100 mt-2 order-btn" 
                                 onclick="orderItem('Macchiato', 'KES 320'); event.stopPropagation();">
                             <i class="bi bi-cart-plus me-2"></i>Order Now
                         </button>
@@ -319,7 +323,7 @@
                             <span class="price">KES 350</span>
                         </div>
                         <p class="text-secondary small">Equal parts espresso, steamed milk, and foam</p>
-                        <button class="btn btn-primary btn-sm w-100 mt-2 order-btn" 
+                        <button class="btn btn-gold btn-sm w-100 mt-2 order-btn" 
                                 onclick="orderItem('Cappuccino', 'KES 350'); event.stopPropagation();">
                             <i class="bi bi-cart-plus me-2"></i>Order Now
                         </button>
@@ -330,7 +334,7 @@
                          data-src="assets/img/menu/specialty/latte.jpg"
                          data-title="Latte"
                          data-price="KES 380"
-                         data-description="<p>Our signature latte combines rich espresso with perfectly steamed milk, creating a smooth, creamy beverage topped with our baristas' artistic latte art. A perfect balance of coffee strength and milk sweetness.</p><p><strong>Craft Details:</strong></p><ul><li>Double shot of our premium espresso blend</li><li>Steamed milk heated to optimal 65Â°C temperature</li><li>Minimal microfoam for smooth texture</li><li>Beautiful latte art created by skilled baristas</li></ul><p>Available with alternative milk options including oat, almond, and soy milk for dietary preferences.</p>">
+                         data-description="<p>Our signature latte combines rich espresso with perfectly steamed milk, creating a smooth, creamy beverage topped with our baristas' artistic latte art. A perfect balance of coffee strength and milk sweetness.</p><p><strong>Craft Details:</strong></p><ul><li>Double shot of our premium espresso blend</li><li>Steamed milk heated to optimal 65°C temperature</li><li>Minimal microfoam for smooth texture</li><li>Beautiful latte art created by skilled baristas</li></ul><p>Available with alternative milk options including oat, almond, and soy milk for dietary preferences.</p>">
                         <div class="menu-item-image mb-3">
                             <img src="assets/img/menu/specialty/latte.jpg" 
                                  alt="Latte" class="img-fluid rounded">
@@ -340,7 +344,7 @@
                             <span class="price">KES 380</span>
                         </div>
                         <p class="text-secondary small">Smooth espresso with steamed milk and light foam</p>
-                        <button class="btn btn-primary btn-sm w-100 mt-2 order-btn" 
+                        <button class="btn btn-gold btn-sm w-100 mt-2 order-btn" 
                                 onclick="orderItem('Latte', 'KES 380'); event.stopPropagation();">
                             <i class="bi bi-cart-plus me-2"></i>Order Now
                         </button>
@@ -395,7 +399,7 @@
                             <span class="price">KES 420</span>
                         </div>
                         <p class="text-secondary small">Dark chocolate and espresso perfection</p>
-                        <button class="btn btn-primary btn-sm w-100 mt-2 order-btn" 
+                        <button class="btn btn-gold btn-sm w-100 mt-2 order-btn" 
                                 onclick="orderItem('Mocha Noir', 'KES 420'); event.stopPropagation();">
                             <i class="bi bi-cart-plus me-2"></i>Order Now
                         </button>
@@ -691,7 +695,7 @@
                     <form class="newsletter-form mb-3" id="newsletterForm" action="https://formspree.io/f/mldwagay" method="POST">
                         <div class="input-group">
                             <input type="email" class="form-control" name="email" placeholder="Your email address" required>
-                            <button class="btn btn-primary" type="submit">Subscribe</button>
+                            <button class="btn btn-gold" type="submit">Subscribe</button>
                         </div>
                         <!-- Hidden fields for form identification -->
                         <input type="hidden" name="_subject" value="Newsletter Subscription - Barista Coffee">
@@ -708,7 +712,7 @@
             <hr class="footer-divider">
             <div class="row align-items-center">
                 <div class="col-md-6">
-                    <p class="copyright-text">Â© <span id="year"></span> Barista Coffee House. All rights reserved.</p>
+                    <p class="copyright-text">© <span id="year"></span> Barista Coffee House. All rights reserved.</p>
                 </div>
                 <div class="col-md-6 text-md-end">
                     <div class="footer-legal">
