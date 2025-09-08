@@ -1,0 +1,111 @@
+/* Theme tweaks for Barista (Coffee palette) */
+/* Espresso #4E342E, Dark #3E2723, Caramel #8D6E63, Latte #D7CCC8, Cream #F5F0EA */
+body { background: #3E2723; color: #F5F0EA; }
+.brand-gradient { background: linear-gradient(135deg, #8D6E63, #F5F0EA); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.card { background: rgba(245, 240, 234, 0.05); border: 1px solid rgba(215, 204, 200, 0.25); }
+a { color: #D7CCC8; }
+a:hover { color: #F5F0EA; }
+
+/* Forms */
+.form-control, .form-select { background: rgba(78,52,46,.4); border-color: rgba(215,204,200,.25); color: #F5F0EA; }
+.form-control:focus, .form-select:focus { border-color: #8D6E63; box-shadow: 0 0 0 .25rem rgba(141,110,99,.3); }
+.invalid-feedback { display: none; }
+.is-invalid + .invalid-feedback { display: block; }
+
+/* Typography & theme variables */
+:root {
+    --brand-primary: #8D6E63; /* caramel */
+    --brand-accent: #D7CCC8;  /* latte */
+    --brand-dark: #3E2723;    /* dark roast */
+    --brand-espresso: #4E342E;
+    --brand-cream: #F5F0EA;
+}
+body { font-family: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Liberation Sans', sans-serif; }
+.text-secondary { color: #D7CCC8 !important; }
+/* Headings use serif (WP cafe vibes) */
+h1, h2, h3, h4, h5, h6 { font-family: 'Playfair Display', Georgia, 'Times New Roman', serif; letter-spacing: .2px; }
+h1, .display-5, .display-6 { font-weight: 700; }
+
+/* Hero background (replace hero.jpg with your image) */
+#hero {
+    background-image: linear-gradient(180deg, rgba(62,39,35,.1), rgba(62,39,35,.5)), url('/barista/assets/img/hero.jpg');
+    background-size: cover;
+    background-position: center;
+    border-radius: .5rem;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+}
+
+/* Navbar and buttons */
+.navbar { background: rgba(62,39,35,.85) !important; border-bottom: 1px solid rgba(215,204,200,.25) !important; }
+.btn { border-radius: 999px; padding: .6rem 1.25rem; font-weight: 600; }
+.btn-primary { background-color: var(--brand-primary); border-color: var(--brand-primary); }
+.btn-primary:hover { background-color: #7a5b52; border-color: #7a5b52; }
+.btn-outline-info { color: var(--brand-accent); border-color: var(--brand-accent); }
+.btn-outline-info:hover { background-color: var(--brand-accent); color: #3E2723; }
+
+/* Cards and sections */
+section { border-top: 1px solid rgba(215,204,200,.15); }
+main.container { padding-top: 3rem; padding-bottom: 3rem; }
+.navbar-brand { font-family: 'Playfair Display', Georgia, 'Times New Roman', serif; font-weight: 700; }
+
+/* Footer */
+.site-footer { background: #2b1e1b; border-top: 1px solid rgba(215,204,200,.2); }
+.site-footer a { color: #D7CCC8; text-decoration: none; }
+.site-footer a:hover { color: #F5F0EA; text-decoration: underline; }
+.footer-title { font-family: 'Playfair Display', Georgia, serif; font-weight: 700; margin-bottom: .5rem; }
+.newsletter .form-control { background: rgba(245,240,234,.08); border-color: rgba(215,204,200,.25); }
+
+/* Badges */
+.badge-coffee { background: rgba(141,110,99,.25); color: #F5F0EA; border: 1px solid rgba(215,204,200,.25); border-radius: 999px; padding: .35rem .75rem; font-weight: 600; }
+
+/* Menu cards */
+.menu-card h5 { display: flex; justify-content: space-between; align-items: baseline; }
+.price { font-family: 'Poppins', sans-serif; font-weight: 700; color: #F5F0EA; background: rgba(141,110,99,.25); border: 1px solid rgba(215,204,200,.2); border-radius: .4rem; padding: .1rem .4rem; font-size: .9rem; }
+
+/* Menu Item Cards */
+.menu-item-card {
+    background: rgba(245, 240, 234, 0.03);
+    border: 1px solid rgba(215, 204, 200, 0.2);
+    padding: 1.5rem;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.menu-item-card:hover {
+    background: rgba(141, 110, 99, 0.05);
+    border-color: rgba(215, 204, 200, 0.4);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(141, 110, 99, 0.1);
+}
+
+.menu-item-image {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.menu-item-image img {
+    max-width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 2px solid rgba(215, 204, 200, 0.3);
+    transition: all 0.3s ease;
+}
+
+.menu-item-image img:hover {
+    border-color: #D7CCC8;
+    transform: scale(1.05);
+}
+
+.menu-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+

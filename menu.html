@@ -1,0 +1,766 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Menu • Barista</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="/barista/assets/css/dark-style.css">
+    <style>
+        /* Enhanced Modal Styling for Menu */
+        .modal-backdrop {
+            backdrop-filter: blur(10px);
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+        
+        .modal-content {
+            background: linear-gradient(135deg, #2d2d2d 0%, #1f1f1f 100%);
+            border: 1px solid #333;
+            border-radius: 15px;
+            color: #ffffff;
+        }
+        
+        .modal-header {
+            border-bottom: 1px solid #333;
+            background: linear-gradient(135deg, #333 0%, #2d2d2d 100%);
+            border-radius: 15px 15px 0 0;
+        }
+        
+        .modal-title {
+            color: #d4af37;
+            font-weight: 600;
+        }
+        
+        .btn-close {
+            filter: invert(1);
+        }
+        
+        /* Side-by-Side Modal Layout */
+        #menuModalBody .row {
+            min-height: 500px;
+        }
+        
+        #menuModalBody .col-md-6:first-child {
+            background: #000;
+            border-radius: 0 0 0 15px;
+        }
+        
+        #menuModalBody .col-md-6:last-child {
+            background: linear-gradient(135deg, #2d2d2d 0%, #1f1f1f 100%);
+            border-radius: 0 0 15px 0;
+        }
+        
+        #menuModalTitle {
+            color: #d4af37;
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        #menuModalDescription {
+            color: #cccccc;
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+        
+        #menuModalPrice {
+            color: #d4af37 !important;
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+        
+        /* Enhanced hover effects for menu items */
+        .menu-item-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .menu-item-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+        }
+        
+        .menu-item-image {
+            overflow: hidden;
+            border-radius: 8px;
+        }
+        
+        .menu-item-image img {
+            transition: transform 0.3s ease;
+        }
+        
+        .menu-item-card:hover .menu-item-image img {
+            transform: scale(1.05);
+        }
+        
+        /* Order button styling */
+        .order-btn {
+            transition: all 0.3s ease;
+            border-radius: 6px;
+            font-weight: 500;
+            background-color: #d4af37 !important;
+            border-color: #d4af37 !important;
+            color: #1a1a1a !important;
+        }
+        
+        .order-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+            background-color: #c19b26 !important;
+            border-color: #c19b26 !important;
+            color: #1a1a1a !important;
+        }
+        
+        .order-btn:focus,
+        .order-btn:active {
+            background-color: #b8912b !important;
+            border-color: #b8912b !important;
+            color: #1a1a1a !important;
+            box-shadow: 0 0 0 0.2rem rgba(212, 175, 55, 0.25) !important;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            #menuModalBody .row {
+                min-height: auto;
+            }
+            
+            #menuModalBody .col-md-6:first-child {
+                border-radius: 0;
+            }
+            
+            #menuModalBody .col-md-6:last-child {
+                border-radius: 0 0 15px 15px;
+            }
+        }
+        
+        /* Brand Icon Animation */
+        @keyframes brandShine {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="/barista/">
+                <i class="bi bi-cup-hot-fill" style="font-size: 1.4rem; margin-right: 8px; background: linear-gradient(45deg, #d4af37, #ffd700, #ffed4e, #d4af37); background-size: 400% 400%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; animation: brandShine 4s ease-in-out infinite; filter: drop-shadow(0 0 6px rgba(212, 175, 55, 0.5));"></i>Barista
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navMenu">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="/barista/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="/barista/menu.html">Menu</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/barista/about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/barista/contact.html">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/barista/gallery.html">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/barista/events.html">Events</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container text-center">
+            <h1 class="display-4 fw-bold mb-4">Our Menu</h1>
+            <p class="lead text-secondary">Carefully curated beverages and bites crafted with passion</p>
+        </div>
+    </section>
+
+    <!-- Menu Categories Navigation -->
+    <section class="section-padding-sm">
+        <div class="container">
+            <nav class="menu-nav text-center">
+                <a href="#espresso" class="btn btn-outline-primary me-3 mb-2">Espresso</a>
+                <a href="#specialty" class="btn btn-outline-primary me-3 mb-2">Specialty Drinks</a>
+                <a href="#cold-brew" class="btn btn-outline-primary me-3 mb-2">Cold Brew</a>
+                <a href="#pastries" class="btn btn-outline-primary me-3 mb-2">Pastries</a>
+                <a href="#beans" class="btn btn-outline-primary mb-2">Coffee Beans</a>
+            </nav>
+        </div>
+    </section>
+
+    <!-- Espresso Section -->
+    <section class="section-padding" id="espresso">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h2 class="section-title mb-4">
+                        <i class="bi bi-cup-hot me-3"></i>
+                        Espresso Classics
+                    </h2>
+                    <p class="text-secondary">Our foundation drinks, perfectly crafted with precision and care</p>
+                </div>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="menu-item-card" data-bs-toggle="modal" data-bs-target="#menuModal"
+                         data-src="assets/img/menu/espresso/single-espresso.jpg"
+                         data-title="Single Espresso"
+                         data-price="KES 200"
+                         data-description="<p>Experience the purest expression of our coffee beans in this classic single shot. Each espresso is carefully extracted using our professional La Marzocco machine, resulting in a concentrated, aromatic cup with a rich crema layer.</p><p><strong>Tasting Notes:</strong></p><ul><li>Rich, bold flavor with hints of dark chocolate</li><li>Smooth finish with subtle caramel undertones</li><li>Perfect crema indicating optimal extraction</li><li>Served at the ideal temperature of 65-70°C</li></ul><p>Our baristas ensure each shot is pulled within 25-30 seconds for the perfect balance of strength and flavor.</p>">
+                        <div class="menu-item-image mb-3">
+                            <img src="assets/img/menu/espresso/single-espresso.jpg" 
+                                 alt="Single Espresso" class="img-fluid rounded">
+                        </div>
+                        <div class="menu-item-header">
+                            <h5>Single Espresso</h5>
+                            <span class="price">KES 200</span>
+                        </div>
+                        <p class="text-secondary small">Pure, concentrated coffee perfection in a small cup</p>
+                        <button class="btn btn-primary btn-sm w-100 mt-2 order-btn" 
+                                onclick="orderItem('Single Espresso', 'KES 200'); event.stopPropagation();">
+                            <i class="bi bi-cart-plus me-2"></i>Order Now
+                        </button>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="menu-item-card" data-bs-toggle="modal" data-bs-target="#menuModal"
+                         data-src="assets/img/menu/espresso/double-espresso.jpg"
+                         data-title="Double Espresso"
+                         data-price="KES 300"
+                         data-description="<p>For those who appreciate intensity, our double shot delivers a more robust coffee experience. Two perfectly extracted shots combined for enhanced flavor depth and caffeine content.</p><p><strong>Experience:</strong></p><ul><li>Double the flavor intensity of our single shot</li><li>Higher caffeine content for an energizing boost</li><li>Complex flavor profile with pronounced acidity</li><li>Ideal base for milk-based drinks</li></ul><p>Perfect for coffee connoisseurs who enjoy the full-bodied experience of premium espresso.</p>">
+                        <div class="menu-item-image mb-3">
+                            <img src="assets/img/menu/espresso/double-espresso.jpg" 
+                                 alt="Double Espresso" class="img-fluid rounded">
+                        </div>
+                        <div class="menu-item-header">
+                            <h5>Double Espresso</h5>
+                            <span class="price">KES 300</span>
+                        </div>
+                        <p class="text-secondary small">Double the intensity, double the satisfaction</p>
+                        <button class="btn btn-primary btn-sm w-100 mt-2 order-btn" 
+                                onclick="orderItem('Double Espresso', 'KES 300'); event.stopPropagation();">
+                            <i class="bi bi-cart-plus me-2"></i>Order Now
+                        </button>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="menu-item-card" data-bs-toggle="modal" data-bs-target="#menuModal"
+                         data-src="assets/img/menu/espresso/americano.jpg"
+                         data-title="Americano"
+                         data-price="KES 280"
+                         data-description="<p>A classic coffee drink that showcases the pure essence of our espresso, diluted with hot water to create a clean, crisp cup reminiscent of traditional drip coffee but with the complexity of espresso.</p><p><strong>Brewing Method:</strong></p><ul><li>Fresh espresso shot extracted to perfection</li><li>Hot water added to maintain optimal temperature</li><li>Preserves the coffee's natural oils and aromatics</li><li>No milk or sugar added - pure coffee experience</li></ul><p>Perfect for those who enjoy black coffee with the nuanced flavors that only espresso can provide.</p>">
+                        <div class="menu-item-image mb-3">
+                            <img src="assets/img/menu/espresso/americano.jpg" 
+                                 alt="Americano" class="img-fluid rounded">
+                        </div>
+                        <div class="menu-item-header">
+                            <h5>Americano</h5>
+                            <span class="price">KES 280</span>
+                        </div>
+                        <p class="text-secondary small">Espresso with hot water for a clean, crisp taste</p>
+                        <button class="btn btn-primary btn-sm w-100 mt-2 order-btn" 
+                                onclick="orderItem('Americano', 'KES 280'); event.stopPropagation();">
+                            <i class="bi bi-cart-plus me-2"></i>Order Now
+                        </button>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="menu-item-card" data-bs-toggle="modal" data-bs-target="#menuModal"
+                         data-src="assets/img/menu/espresso/macchiato.jpg"
+                         data-title="Macchiato"
+                         data-price="KES 320"
+                         data-description="<p>Traditional Italian espresso 'marked' with just a dollop of steamed milk foam. This drink preserves the bold espresso flavor while adding a touch of creamy sweetness.</p><p><strong>Traditional Preparation:</strong></p><ul><li>Single shot of rich espresso as the base</li><li>Small amount of steamed milk foam on top</li><li>Maintains strong coffee flavor profile</li><li>Served in small demitasse cup</li></ul><p>Perfect for those who want to experience espresso with just a hint of milk's smoothness.</p>">
+                        <div class="menu-item-image mb-3">
+                            <img src="assets/img/menu/espresso/macchiato.jpg" 
+                                 alt="Macchiato" class="img-fluid rounded">
+                        </div>
+                        <div class="menu-item-header">
+                            <h5>Macchiato</h5>
+                            <span class="price">KES 320</span>
+                        </div>
+                        <p class="text-secondary small">Espresso "marked" with a dollop of steamed milk foam</p>
+                        <button class="btn btn-primary btn-sm w-100 mt-2 order-btn" 
+                                onclick="orderItem('Macchiato', 'KES 320'); event.stopPropagation();">
+                            <i class="bi bi-cart-plus me-2"></i>Order Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Specialty Drinks Section -->
+    <section class="section-padding bg-dark-alt" id="specialty">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h2 class="section-title mb-4">
+                        <i class="bi bi-stars me-3"></i>
+                        Specialty Drinks
+                    </h2>
+                    <p class="text-secondary">Milk-based classics and seasonal favorites</p>
+                </div>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="menu-item-card" data-bs-toggle="modal" data-bs-target="#menuModal"
+                         data-src="assets/img/menu/specialty/cappuccino.jpg"
+                         data-title="Cappuccino"
+                         data-price="KES 350"
+                         data-description="<p>The perfect balance of espresso, steamed milk, and velvety microfoam creates this beloved Italian classic. Our cappuccino showcases the harmony between coffee strength and milk sweetness.</p><p><strong>Components:</strong></p><ul><li>1/3 fresh espresso for robust coffee flavor</li><li>1/3 steamed milk for creamy texture</li><li>1/3 microfoam for light, airy finish</li><li>Optional cocoa dusting for enhanced presentation</li></ul><p>Served in our traditional 6oz cups at the perfect temperature to enjoy the layered flavors and textures that make cappuccino a timeless favorite.</p>">
+                        <div class="menu-item-image mb-3">
+                            <img src="assets/img/menu/specialty/cappuccino.jpg" 
+                                 alt="Cappuccino" class="img-fluid rounded">
+                        </div>
+                        <div class="menu-item-header">
+                            <h5>Cappuccino</h5>
+                            <span class="price">KES 350</span>
+                        </div>
+                        <p class="text-secondary small">Equal parts espresso, steamed milk, and foam</p>
+                        <button class="btn btn-primary btn-sm w-100 mt-2 order-btn" 
+                                onclick="orderItem('Cappuccino', 'KES 350'); event.stopPropagation();">
+                            <i class="bi bi-cart-plus me-2"></i>Order Now
+                        </button>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="menu-item-card" data-bs-toggle="modal" data-bs-target="#menuModal"
+                         data-src="assets/img/menu/specialty/latte.jpg"
+                         data-title="Latte"
+                         data-price="KES 380"
+                         data-description="<p>Our signature latte combines rich espresso with perfectly steamed milk, creating a smooth, creamy beverage topped with our baristas' artistic latte art. A perfect balance of coffee strength and milk sweetness.</p><p><strong>Craft Details:</strong></p><ul><li>Double shot of our premium espresso blend</li><li>Steamed milk heated to optimal 65°C temperature</li><li>Minimal microfoam for smooth texture</li><li>Beautiful latte art created by skilled baristas</li></ul><p>Available with alternative milk options including oat, almond, and soy milk for dietary preferences.</p>">
+                        <div class="menu-item-image mb-3">
+                            <img src="assets/img/menu/specialty/latte.jpg" 
+                                 alt="Latte" class="img-fluid rounded">
+                        </div>
+                        <div class="menu-item-header">
+                            <h5>Latte</h5>
+                            <span class="price">KES 380</span>
+                        </div>
+                        <p class="text-secondary small">Smooth espresso with steamed milk and light foam</p>
+                        <button class="btn btn-primary btn-sm w-100 mt-2 order-btn" 
+                                onclick="orderItem('Latte', 'KES 380'); event.stopPropagation();">
+                            <i class="bi bi-cart-plus me-2"></i>Order Now
+                        </button>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="menu-item-card" data-bs-toggle="modal" data-bs-target="#menuModal"
+                         data-src="assets/img/menu/specialty/flat-white.jpg"
+                         data-title="Flat White"
+                         data-price="KES 380"
+                         data-description="<p>Originating from Australia and New Zealand, the flat white features a double shot of espresso with steamed milk and minimal foam. It's stronger than a latte but smoother than a cappuccino.</p><p><strong>Characteristics:</strong></p><ul><li>Double shot espresso for robust flavor</li><li>Steamed milk with minimal microfoam</li><li>Stronger coffee-to-milk ratio than latte</li><li>Served in smaller 6oz cup</li></ul><p>Perfect for those who enjoy a strong coffee flavor with the smoothness of steamed milk.</p>">
+                        <div class="menu-item-image mb-3">
+                            <img src="assets/img/menu/specialty/flat-white.jpg" 
+                                 alt="Flat White" class="img-fluid rounded">
+                        </div>
+                        <div class="menu-item-header">
+                            <h5>Flat White</h5>
+                            <span class="price">KES 380</span>
+                        </div>
+                        <p class="text-secondary small">Double shot with steamed milk, no foam</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="menu-item-card" data-bs-toggle="modal" data-bs-target="#menuModal"
+                         data-src="assets/img/menu/specialty/maple-oat-latte.jpg"
+                         data-title="Maple Oat Latte"
+                         data-price="KES 450"
+                         data-description="<p>Our seasonal specialty featuring the perfect combination of rich espresso, creamy oat milk, and pure Canadian maple syrup. This plant-based favorite offers a naturally sweet, indulgent experience.</p><p><strong>Seasonal Highlights:</strong></p><ul><li>Premium oat milk for natural creaminess</li><li>100% pure maple syrup - no artificial flavoring</li><li>Perfectly balanced sweetness and coffee flavor</li><li>Dairy-free and vegan-friendly option</li></ul><p>Limited availability during autumn and winter months. This warming beverage captures the essence of cozy seasonal moments with its natural sweetness and comforting aroma.</p>">
+                        <div class="menu-item-image mb-3">
+                            <img src="assets/img/menu/specialty/maple-oat-latte.jpg" 
+                                 alt="Maple Oat Latte" class="img-fluid rounded">
+                        </div>
+                        <div class="menu-item-header">
+                            <h5>Maple Oat Latte</h5>
+                            <span class="price">KES 450</span>
+                        </div>
+                        <p class="text-secondary small">Our seasonal special with oat milk and maple syrup</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="menu-item-card" data-bs-toggle="modal" data-bs-target="#menuModal"
+                         data-src="assets/img/menu/specialty/mocha-noir.jpg"
+                         data-title="Mocha Noir"
+                         data-price="KES 420"
+                         data-description="<p>Indulge in our rich and decadent Mocha Noir, where premium dark chocolate meets perfectly extracted espresso. This luxurious drink combines the intensity of coffee with the smoothness of quality chocolate.</p><p><strong>Premium Ingredients:</strong></p><ul><li>Double shot of our signature espresso</li><li>Belgian dark chocolate (70% cocoa)</li><li>Perfectly steamed milk</li><li>Optional whipped cream topping</li></ul><p>A perfect treat for chocolate lovers who appreciate the complexity that comes from pairing high-quality coffee with premium dark chocolate.</p>">
+                        <div class="menu-item-image mb-3">
+                            <img src="assets/img/menu/specialty/mocha-noir.jpg" 
+                                 alt="Mocha Noir" class="img-fluid rounded">
+                        </div>
+                        <div class="menu-item-header">
+                            <h5>Mocha Noir</h5>
+                            <span class="price">KES 420</span>
+                        </div>
+                        <p class="text-secondary small">Dark chocolate and espresso perfection</p>
+                        <button class="btn btn-primary btn-sm w-100 mt-2 order-btn" 
+                                onclick="orderItem('Mocha Noir', 'KES 420'); event.stopPropagation();">
+                            <i class="bi bi-cart-plus me-2"></i>Order Now
+                        </button>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="menu-item-card">
+                        <div class="menu-item-image mb-3">
+                            <img src="assets/img/menu/specialty/caramel-macchiato.jpg" 
+                                 alt="Caramel Macchiato" class="img-fluid rounded">
+                        </div>
+                        <div class="menu-item-header">
+                            <h5>Caramel Macchiato</h5>
+                            <span class="price">KES 430</span>
+                        </div>
+                        <p class="text-secondary small">Vanilla steamed milk marked with espresso and caramel</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cold Brew Section -->
+    <section class="section-padding" id="cold-brew">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h2 class="section-title mb-4">
+                        <i class="bi bi-snow me-3"></i>
+                        Cold Brew & Iced
+                    </h2>
+                    <p class="text-secondary">Refreshing cold coffee options for any season</p>
+                </div>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="menu-item-card" data-bs-toggle="modal" data-bs-target="#menuModal"
+                         data-src="assets/img/menu/coldbrew/cold-brew.jpg"
+                         data-title="Cold Brew"
+                         data-price="KES 350"
+                         data-description="<p>Our smooth cold brew is steeped for 12 hours using a cold water extraction method that produces a naturally sweet, less acidic coffee concentrate. Served over ice for the perfect refreshing experience.</p><p><strong>Cold Brewing Process:</strong></p><ul><li>12-hour cold water steeping process</li><li>Coarse ground premium coffee beans</li><li>Lower acidity than hot-brewed coffee</li><li>Naturally smooth and sweet flavor profile</li></ul><p>Perfect for hot days or when you want a refreshing coffee experience without the bitterness.</p>">
+                        <div class="menu-item-image mb-3">
+                            <img src="assets/img/menu/coldbrew/cold-brew.jpg" 
+                                 alt="Cold Brew" class="img-fluid rounded">
+                        </div>
+                        <div class="menu-item-header">
+                            <h5>Cold Brew</h5>
+                            <span class="price">KES 350</span>
+                        </div>
+                        <p class="text-secondary small">Smooth, slow-steeped coffee served over ice</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="menu-item-card">
+                        <div class="menu-item-image mb-3">
+                            <img src="assets/img/menu/coldbrew/honey-cinnamon.jpg" 
+                                 alt="Honey Cinnamon Cold Brew" class="img-fluid rounded">
+                        </div>
+                        <div class="menu-item-header">
+                            <h5>Honey Cinnamon Cold Brew</h5>
+                            <span class="price">KES 420</span>
+                        </div>
+                        <p class="text-secondary small">Cold brew with honey and a touch of cinnamon</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="menu-item-card">
+                        <div class="menu-item-image mb-3">
+                            <img src="assets/img/menu/coldbrew/iced-latte.jpg" 
+                                 alt="Iced Latte" class="img-fluid rounded">
+                        </div>
+                        <div class="menu-item-header">
+                            <h5>Iced Latte</h5>
+                            <span class="price">KES 380</span>
+                        </div>
+                        <p class="text-secondary small">Espresso with cold milk over ice</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="menu-item-card">
+                        <div class="menu-item-image mb-3">
+                            <img src="assets/img/menu/coldbrew/affogato.jpg" 
+                                 alt="Affogato" class="img-fluid rounded">
+                        </div>
+                        <div class="menu-item-header">
+                            <h5>Affogato</h5>
+                            <span class="price">KES 400</span>
+                        </div>
+                        <p class="text-secondary small">Vanilla ice cream "drowned" in hot espresso</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pastries Section -->
+    <section class="section-padding bg-dark-alt" id="pastries">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h2 class="section-title mb-4">
+                        <i class="bi bi-cake2 me-3"></i>
+                        Fresh Pastries
+                    </h2>
+                    <p class="text-secondary">Baked fresh daily to complement your coffee</p>
+                </div>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="menu-item-card">
+                        <div class="menu-item-image mb-3">
+                            <img src="assets/img/menu/pastries/almond-croissant.jpg" 
+                                 alt="Almond Croissant" class="img-fluid rounded">
+                        </div>
+                        <div class="menu-item-header">
+                            <h5>Almond Croissant</h5>
+                            <span class="price">KES 280</span>
+                        </div>
+                        <p class="text-secondary small">Buttery croissant filled with almond cream</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="menu-item-card">
+                        <div class="menu-item-image mb-3">
+                            <img src="assets/img/menu/pastries/chocolate-muffin.jpg" 
+                                 alt="Chocolate Muffin" class="img-fluid rounded">
+                        </div>
+                        <div class="menu-item-header">
+                            <h5>Chocolate Muffin</h5>
+                            <span class="price">KES 250</span>
+                        </div>
+                        <p class="text-secondary small">Rich chocolate muffin with chocolate chips</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="menu-item-card">
+                        <div class="menu-item-image mb-3">
+                            <img src="assets/img/menu/pastries/blueberry-scone.jpg" 
+                                 alt="Blueberry Scone" class="img-fluid rounded">
+                        </div>
+                        <div class="menu-item-header">
+                            <h5>Blueberry Scone</h5>
+                            <span class="price">KES 220</span>
+                        </div>
+                        <p class="text-secondary small">Traditional scone with fresh blueberries</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="menu-item-card">
+                        <div class="menu-item-image mb-3">
+                            <img src="assets/img/menu/pastries/banana-bread.jpg" 
+                                 alt="Banana Bread" class="img-fluid rounded">
+                        </div>
+                        <div class="menu-item-header">
+                            <h5>Banana Bread</h5>
+                            <span class="price">KES 200</span>
+                        </div>
+                        <p class="text-secondary small">Moist banana bread with walnuts</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Coffee Beans Section -->
+    <section class="section-padding" id="beans">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h2 class="section-title mb-4">
+                        <i class="bi bi-cup me-3"></i>
+                        Take Home Coffee
+                    </h2>
+                    <p class="text-secondary">Freshly roasted beans for brewing at home</p>
+                </div>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="menu-item-card">
+                        <div class="menu-item-image mb-3">
+                            <img src="assets/img/menu/beans/ethiopia-yirgacheffe.jpg" 
+                                 alt="Ethiopia Yirgacheffe" class="img-fluid rounded">
+                        </div>
+                        <div class="menu-item-header">
+                            <h5>Ethiopia Yirgacheffe (250g)</h5>
+                            <span class="price">KES 1,200</span>
+                        </div>
+                        <p class="text-secondary small">Bright, floral notes with hints of citrus</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="menu-item-card">
+                        <div class="menu-item-image mb-3">
+                            <img src="assets/img/menu/beans/guatemala-antigua.jpg" 
+                                 alt="Guatemala Antigua" class="img-fluid rounded">
+                        </div>
+                        <div class="menu-item-header">
+                            <h5>Guatemala Antigua (250g)</h5>
+                            <span class="price">KES 1,100</span>
+                        </div>
+                        <p class="text-secondary small">Full-bodied with chocolate undertones</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="menu-item-card">
+                        <div class="menu-item-image mb-3">
+                            <img src="https://images.unsplash.com/photo-1610632380989-680fe40816c6?w=400&h=300&fit=crop" 
+                                 alt="Colombia Supremo" class="img-fluid rounded">
+                        </div>
+                        <div class="menu-item-header">
+                            <h5>Colombia Supremo (250g)</h5>
+                            <span class="price">KES 1,000</span>
+                        </div>
+                        <p class="text-secondary small">Balanced acidity with caramel sweetness</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="menu-item-card">
+                        <div class="menu-item-image mb-3">
+                            <img src="assets/img/menu/beans/house-blend.jpg" 
+                                 alt="House Blend" class="img-fluid rounded">
+                        </div>
+                        <div class="menu-item-header">
+                            <h5>House Blend (250g)</h5>
+                            <span class="price">KES 900</span>
+                        </div>
+                        <p class="text-secondary small">Our signature blend, perfect for any brewing method</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced Modal for Menu Items -->
+    <div class="modal fade" id="menuModal" tabindex="-1" aria-labelledby="menuModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="menuModalLabel">Menu Item</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                
+                <!-- Enhanced Modal Body with Side-by-Side Layout -->
+                <div class="modal-body p-0" id="menuModalBody">
+                    <div class="row g-0">
+                        <div class="col-md-6 d-flex align-items-center justify-content-center p-0">
+                            <img id="menuModalImage" src="" alt="" class="img-fluid" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <div class="col-md-6 d-flex flex-column justify-content-center p-4">
+                            <h3 id="menuModalTitle" class="mb-3"></h3>
+                            <div id="menuModalDescription" class="mb-4"></div>
+                            <div class="menu-modal-price">
+                                <h4 id="menuModalPrice" class="text-primary mb-0"></h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="site-footer section-padding">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <div class="footer-brand">
+                        <h4 class="mb-3">Barista</h4>
+                        <p class="text-secondary">Crafting exceptional coffee experiences since 2010. Join our community for events, tastings, and coffee education.</p>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <h6 class="footer-title">Menu</h6>
+                    <ul class="footer-links">
+                        <li><a href="#espresso">Espresso</a></li>
+                        <li><a href="#specialty">Specialty Drinks</a></li>
+                        <li><a href="#pastries">Pastries</a></li>
+                        <li><a href="#beans">Coffee Beans</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2">
+                    <h6 class="footer-title">Company</h6>
+                    <ul class="footer-links">
+                        <li><a href="/barista/about.html">About Us</a></li>
+                        <li><a href="/barista/contact.html">Contact</a></li>
+                        <li><a href="/barista/gallery.html">Gallery</a></li>
+                        <li><a href="#">Careers</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <h6 class="footer-title">Stay Connected</h6>
+                    <p class="text-secondary small mb-3">Subscribe to our newsletter for the latest updates and offers.</p>
+                    <form class="newsletter-form mb-3" id="newsletterForm" action="https://formspree.io/f/mldwagay" method="POST">
+                        <div class="input-group">
+                            <input type="email" class="form-control" name="email" placeholder="Your email address" required>
+                            <button class="btn btn-primary" type="submit">Subscribe</button>
+                        </div>
+                        <!-- Hidden fields for form identification -->
+                        <input type="hidden" name="_subject" value="Newsletter Subscription - Barista Coffee">
+                        <input type="hidden" name="formType" value="newsletter">
+                    </form>
+                    <div class="social-links">
+                        <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                        <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="footer-divider">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="copyright-text">© <span id="year"></span> Barista Coffee House. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <div class="footer-legal">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+        
+        // Smooth scrolling for menu navigation
+        document.querySelectorAll('.menu-nav a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Enhanced Modal for Menu Items
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuModal = document.getElementById('menuModal');
+            const modalImage = document.getElementById('menuModalImage');
+            const modalTitle = document.getElementById('menuModalTitle');
+            const modalDescription = document.getElementById('menuModalDescription');
+            const modalPrice = document.getElementById('menuModalPrice');
+            
+            document.querySelectorAll('.menu-item-card[data-bs-toggle="modal"]').forEach(item => {
+                item.addEventListener('click', function() {
+                    const src = this.getAttribute('data-src');
+                    const title = this.getAttribute('data-title');
+                    const description = this.getAttribute('data-description');
+                    const price = this.getAttribute('data-price');
+                    
+                    modalImage.src = src;
+                    modalImage.alt = title;
+                    modalTitle.textContent = title;
+                    modalDescription.innerHTML = description;
+                    modalPrice.textContent = price;
+                });
+            });
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>

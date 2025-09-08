@@ -1,0 +1,932 @@
+/* Dark Theme for Barista - Mirror of qodeinteractive dark home */
+body { 
+    background: #1a1a1a; 
+    color: #e8e3d8; 
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+/* Dark sections with consistent spacing */
+.dark-section {
+    background: #1a1a1a;
+    padding: 80px 0;
+}
+
+/* Hero section with natural slideshow */
+.hero-section {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    color: white;
+    text-align: center;
+}
+
+.hero-slideshow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.hero-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transform: scale(1.1);
+    transition: all 2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.hero-slide.active {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.hero-slide.fade-out {
+    opacity: 0;
+    transform: scale(0.95);
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.5));
+    z-index: 2;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 3;
+    width: 100%;
+}
+
+/* Section titles with gold accent */
+.section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    font-weight: 600;
+    color: #d4af37;
+    text-align: center;
+    margin-bottom: 60px;
+    letter-spacing: 2px;
+}
+
+/* Coffee cards with hover effects */
+.coffee-card {
+    background: rgba(40, 40, 40, 0.8);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-radius: 8px;
+    padding: 30px;
+    text-align: center;
+    margin-bottom: 30px;
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.coffee-card:hover {
+    transform: translateY(-5px);
+    border-color: #d4af37;
+    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
+}
+
+/* Coffee icons */
+.coffee-icon {
+    width: 80px;
+    height: 80px;
+    background: #d4af37;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 2rem;
+    color: #1a1a1a;
+}
+
+/* Navigation styling */
+.navbar {
+    background: rgba(26, 26, 26, 0.95) !important;
+    backdrop-filter: blur(10px);
+    padding: 15px 0;
+}
+
+.navbar-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #d4af37 !important;
+}
+
+.brand-icon {
+    font-size: 1.6rem;
+    background: linear-gradient(45deg, #d4af37, #ffd700, #ffed4e, #d4af37);
+    background-size: 400% 400%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: brandShine 4s ease-in-out infinite;
+    filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.6)) 
+            drop-shadow(0 0 16px rgba(212, 175, 55, 0.4));
+    transform: scale(1);
+    transition: all 0.3s ease;
+}
+
+.navbar-brand:hover .brand-icon {
+    transform: scale(1.1) rotate(10deg);
+    filter: drop-shadow(0 0 12px rgba(212, 175, 55, 0.8)) 
+            drop-shadow(0 0 20px rgba(212, 175, 55, 0.6))
+            drop-shadow(0 0 30px rgba(212, 175, 55, 0.4));
+    animation-duration: 2s;
+}
+
+@keyframes brandShine {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.nav-link {
+    color: #e8e3d8 !important;
+    font-weight: 500;
+    margin: 0 10px;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #d4af37 !important;
+}
+
+/* Gold button styling */
+.btn-gold {
+    background: #d4af37;
+    border: 2px solid #d4af37;
+    color: #1a1a1a;
+    font-weight: 600;
+    padding: 12px 30px;
+    border-radius: 30px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.btn-gold:hover {
+    background: transparent;
+    color: #d4af37;
+    text-decoration: none;
+}
+
+.btn-gold.btn-sm {
+    padding: 8px 20px;
+    font-size: 0.85rem;
+}
+
+/* Gallery items with overlay effects */
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    cursor: pointer;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.05);
+}
+
+.gallery-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.8));
+    display: flex;
+    align-items: end;
+    padding: 20px;
+    color: white;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.gallery-item:hover .gallery-overlay {
+    opacity: 1;
+}
+
+/* Opening hours table */
+.hours-table {
+    border: none;
+    width: 100%;
+}
+
+.hours-table td {
+    border: none;
+    padding: 8px 0;
+    color: #e8e3d8;
+}
+
+/* Blog cards */
+.blog-card {
+    background: rgba(40, 40, 40, 0.6);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 30px;
+    transition: all 0.3s ease;
+}
+
+.blog-card:hover {
+    border-color: #d4af37;
+    transform: translateY(-2px);
+}
+
+.blog-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.blog-content {
+    padding: 20px;
+}
+
+.blog-content h5 a {
+    color: #d4af37;
+    text-decoration: none;
+    font-family: 'Playfair Display', serif;
+}
+
+.blog-content h5 a:hover {
+    color: #f0d060;
+}
+
+/* Footer styling */
+footer {
+    background: #111 !important;
+}
+
+footer h4, footer h5, footer h6 {
+    color: #d4af37;
+    font-family: 'Playfair Display', serif;
+}
+
+footer a {
+    color: #e8e3d8;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+footer a:hover {
+    color: #d4af37;
+}
+
+/* Social links */
+.social-links a {
+    margin: 0 10px;
+    color: #d4af37;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+    color: #f0d060;
+}
+
+/* Typography adjustments */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+}
+
+h3 {
+    color: #d4af37;
+    font-weight: 600;
+}
+
+p {
+    color: #e8e3d8;
+    line-height: 1.7;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .section-title {
+        font-size: 2rem;
+        margin-bottom: 40px;
+    }
+    
+    .hero-section h1 {
+        font-size: 2.5rem;
+    }
+    
+    .coffee-card {
+        margin-bottom: 20px;
+    }
+    
+    .dark-section {
+        padding: 60px 0;
+    }
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Remove default Bootstrap button focus styles */
+.btn:focus {
+    box-shadow: none;
+}
+
+/* Additional styles for updated pages */
+
+/* Menu items styling */
+.menu-items {
+    margin-top: 20px;
+}
+
+.menu-items .d-flex {
+    border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+    padding: 8px 0;
+}
+
+.menu-items .d-flex:last-child {
+    border-bottom: none;
+}
+
+/* Form styling for dark theme */
+.form-control:focus {
+    background: rgba(26, 26, 26, 0.9);
+    border-color: #d4af37;
+    box-shadow: 0 0 0 0.25rem rgba(212, 175, 55, 0.25);
+    color: #e8e3d8;
+}
+
+.form-control::placeholder {
+    color: rgba(232, 227, 216, 0.6);
+}
+
+.form-label {
+    font-weight: 500;
+}
+
+/* Gallery enhancements */
+.gallery-item {
+    cursor: pointer;
+}
+
+.gallery-overlay {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* Active nav link styling */
+.nav-link.active {
+    color: #d4af37 !important;
+    font-weight: 600;
+}
+
+/* Enhanced hover effects */
+.coffee-card:hover .coffee-icon {
+    transform: scale(1.1);
+    background: #f0d060;
+}
+
+.coffee-icon {
+    transition: all 0.3s ease;
+}
+
+/* Blog card enhancements */
+.blog-card .blog-content p.small {
+    color: rgba(232, 227, 216, 0.7);
+}
+
+/* Team member styling */
+.coffee-card h6 {
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Footer enhancements */
+footer p.small {
+    color: rgba(232, 227, 216, 0.8);
+    line-height: 1.5;
+}
+
+footer h6 {
+    color: #d4af37;
+    margin-bottom: 10px;
+    margin-top: 20px;
+}
+
+footer h6:first-of-type {
+    margin-top: 0;
+}
+
+/* Modal styling for gallery */
+.modal-content {
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.modal-body img {
+    border-radius: 8px;
+}
+
+/* Responsive typography */
+@media (max-width: 576px) {
+    .section-title {
+        font-size: 2.2rem;
+    }
+    
+    .coffee-card {
+        padding: 20px;
+    }
+    
+    .coffee-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
+}
+
+/* Navbar toggler for dark theme */
+.navbar-toggler {
+    border-color: rgba(212, 175, 55, 0.5);
+}
+
+.navbar-toggler:focus {
+    box-shadow: 0 0 0 0.25rem rgba(212, 175, 55, 0.25);
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28212, 175, 55, 0.8%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+/* Additional Layout Classes */
+.section-padding {
+    padding: 80px 0;
+}
+
+.section-padding-sm {
+    padding: 40px 0;
+}
+
+.page-header {
+    padding: 120px 0 60px;
+    background: linear-gradient(135deg, rgba(26, 26, 26, 0.9), rgba(26, 26, 26, 0.8)), 
+                url('https://images.unsplash.com/photo-1447933601403-0c6688de566e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.feature-card {
+    padding: 2rem;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+}
+
+.feature-icon {
+    font-size: 3rem;
+    background: linear-gradient(45deg, #d4af37, #ffd700, #ffed4e, #d4af37);
+    background-size: 400% 400%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: goldShine 3s ease-in-out infinite;
+    filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.6)) 
+            drop-shadow(0 0 20px rgba(212, 175, 55, 0.4))
+            drop-shadow(0 0 30px rgba(212, 175, 55, 0.2));
+    transform: scale(1);
+    transition: all 0.3s ease;
+}
+
+.feature-icon:hover {
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.8)) 
+            drop-shadow(0 0 25px rgba(212, 175, 55, 0.6))
+            drop-shadow(0 0 35px rgba(212, 175, 55, 0.4));
+    animation-duration: 1.5s;
+}
+
+@keyframes goldShine {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.menu-nav a {
+    border-color: #d4af37;
+    color: #d4af37;
+    transition: all 0.3s ease;
+}
+
+.menu-nav a:hover {
+    background-color: #d4af37;
+    border-color: #d4af37;
+    color: #1a1a1a;
+}
+
+.menu-item-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.menu-item-card:hover {
+    border-color: rgba(212, 175, 55, 0.4);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(212, 175, 55, 0.1);
+}
+
+.menu-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.75rem;
+}
+
+.menu-item-header h5 {
+    margin: 0;
+    flex: 1;
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.price {
+    color: #d4af37;
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-left: 1rem;
+}
+
+.gallery-item {
+    overflow: hidden;
+    border-radius: 12px;
+    transition: transform 0.3s ease;
+}
+
+.gallery-item:hover {
+    transform: scale(1.05);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.1);
+}
+
+.footer-divider {
+    border-color: rgba(212, 175, 55, 0.2);
+    margin: 2rem 0 1.5rem;
+}
+
+.footer-legal a {
+    color: #94a3b8;
+    text-decoration: none;
+    margin-left: 1rem;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+.footer-legal a:hover {
+    color: #d4af37;
+}
+
+.footer-legal a:first-child {
+    margin-left: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .section-padding {
+        padding: 60px 0;
+    }
+    
+    .page-header {
+        padding: 100px 0 40px;
+    }
+    
+    .menu-item-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .price {
+        margin-left: 0;
+        margin-top: 0.25rem;
+    }
+    
+    .feature-card {
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+    }
+}
+
+/* Team Cards */
+.team-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(212, 175, 55, 0.1);
+    border-radius: 12px;
+    padding: 2rem;
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.team-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(212, 175, 55, 0.3);
+    box-shadow: 0 10px 40px rgba(212, 175, 55, 0.1);
+}
+
+.team-photo {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #d4af37;
+    margin: 0 auto;
+}
+
+.team-card h5 {
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+}
+
+.team-card .text-primary {
+    color: #d4af37 !important;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Contact Page Styles */
+.contact-info-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(212, 175, 55, 0.1);
+    border-radius: 12px;
+    padding: 2rem;
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.contact-info-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(212, 175, 55, 0.3);
+    box-shadow: 0 10px 40px rgba(212, 175, 55, 0.1);
+}
+
+.contact-icon {
+    font-size: 3rem;
+    color: #d4af37;
+}
+
+.contact-form-wrapper {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(212, 175, 55, 0.1);
+    border-radius: 12px;
+    padding: 2rem;
+}
+
+.contact-form .form-control,
+.contact-form .form-select {
+    background: rgba(26, 26, 26, 0.8);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    color: #e8e3d8;
+}
+
+.contact-form .form-control:focus,
+.contact-form .form-select:focus {
+    background: rgba(26, 26, 26, 0.9);
+    border-color: #d4af37;
+    box-shadow: 0 0 0 0.25rem rgba(212, 175, 55, 0.25);
+    color: #ffffff;
+}
+
+.contact-form .form-label {
+    color: #d4af37;
+    font-weight: 500;
+}
+
+.hours-wrapper {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(212, 175, 55, 0.1);
+    border-radius: 12px;
+    padding: 2rem;
+}
+
+.hours-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(212, 175, 55, 0.1);
+    border-radius: 8px;
+    padding: 1.5rem;
+}
+
+.hours-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.hours-icon {
+    font-size: 1.5rem;
+    color: #d4af37;
+    margin-right: 0.75rem;
+}
+
+.hours-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+}
+
+.hours-item:last-child {
+    border-bottom: none;
+}
+
+.hours-item .day {
+    font-weight: 500;
+    color: #ffffff;
+}
+
+.hours-item .time {
+    color: #d4af37;
+}
+
+.reservation-form-wrapper {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(212, 175, 55, 0.1);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-top: 2rem;
+}
+
+.reservation-form .form-control,
+.reservation-form .form-select {
+    background: rgba(26, 26, 26, 0.8);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    color: #e8e3d8;
+}
+
+.reservation-form .form-control:focus,
+.reservation-form .form-select:focus {
+    background: rgba(26, 26, 26, 0.9);
+    border-color: #d4af37;
+    box-shadow: 0 0 0 0.25rem rgba(212, 175, 55, 0.25);
+    color: #ffffff;
+}
+
+.reservation-form .form-label {
+    color: #d4af37;
+    font-weight: 500;
+}
+
+/* Gallery Page Styles */
+.gallery-nav .btn {
+    border-color: #d4af37;
+    color: #d4af37;
+    transition: all 0.3s ease;
+}
+
+.gallery-nav .btn:hover,
+.gallery-nav .btn.active {
+    background-color: #d4af37;
+    border-color: #d4af37;
+    color: #1a1a1a;
+}
+
+.gallery-item-wrapper {
+    transition: all 0.3s ease;
+}
+
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.gallery-item:hover {
+    transform: scale(1.05);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.1);
+}
+
+.gallery-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, transparent 0%, rgba(26, 26, 26, 0.8) 100%);
+    display: flex;
+    align-items: flex-end;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.gallery-item:hover .gallery-overlay {
+    opacity: 1;
+}
+
+.gallery-content {
+    padding: 1.5rem;
+    color: white;
+    width: 100%;
+}
+
+.gallery-content h5 {
+    margin-bottom: 0.5rem;
+    color: #d4af37;
+    font-weight: 600;
+}
+
+.gallery-content p {
+    margin: 0;
+    color: #e8e3d8;
+    font-size: 0.9rem;
+}
+
+/* Modal Styles */
+.modal-content {
+    background: #1a1a1a;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    border-radius: 12px;
+}
+
+.modal-header {
+    border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+.modal-title {
+    color: #d4af37;
+}
+
+.btn-close {
+    filter: invert(1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .contact-info-card,
+    .contact-form-wrapper,
+    .hours-wrapper,
+    .reservation-form-wrapper {
+        margin-bottom: 2rem;
+    }
+    
+    .gallery-item img {
+        height: 250px;
+    }
+    
+    .gallery-overlay {
+        opacity: 1;
+        background: linear-gradient(to bottom, transparent 0%, rgba(26, 26, 26, 0.6) 100%);
+    }
+}

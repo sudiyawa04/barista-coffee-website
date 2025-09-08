@@ -1,0 +1,551 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Gallery • Barista</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="/barista/assets/css/dark-style.css">
+    
+    <style>
+        /* Enhanced Modal Styling */
+        .modal-backdrop {
+            backdrop-filter: blur(10px);
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+        
+        .modal-content {
+            background: linear-gradient(135deg, #2d2d2d 0%, #1f1f1f 100%);
+            border: 1px solid #333;
+            border-radius: 15px;
+            color: #ffffff;
+        }
+        
+        .modal-header {
+            border-bottom: 1px solid #333;
+            background: linear-gradient(135deg, #333 0%, #2d2d2d 100%);
+            border-radius: 15px 15px 0 0;
+        }
+        
+        .modal-title {
+            color: #d4af37;
+            font-weight: 600;
+        }
+        
+        .btn-close {
+            filter: invert(1);
+        }
+        
+        /* Side-by-Side Modal Layout */
+        #peopleModalBody .row {
+            min-height: 500px;
+        }
+        
+        #peopleModalBody .col-md-6:first-child {
+            background: #000;
+            border-radius: 0 0 0 15px;
+        }
+        
+        #peopleModalBody .col-md-6:last-child {
+            background: linear-gradient(135deg, #2d2d2d 0%, #1f1f1f 100%);
+            border-radius: 0 0 15px 0;
+        }
+        
+        #peopleModalTitle {
+            color: #d4af37;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        #peopleModalDescription {
+            color: #cccccc;
+            line-height: 1.6;
+        }
+        
+        #peopleModalDescription p {
+            margin-bottom: 1rem;
+        }
+        
+        #peopleModalDescription ul {
+            padding-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        #peopleModalDescription li {
+            margin-bottom: 0.5rem;
+            color: #d4d4d4;
+        }
+        
+        #peopleModalDescription strong {
+            color: #d4af37;
+        }
+        
+        /* Enhanced hover effects */
+        .gallery-item {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            #peopleModalBody .row {
+                min-height: auto;
+            }
+            
+            #peopleModalBody .col-md-6:first-child {
+                border-radius: 0;
+            }
+            
+            #peopleModalBody .col-md-6:last-child {
+                border-radius: 0 0 15px 15px;
+            }
+        }
+        
+        /* Brand Icon Animation */
+        @keyframes brandShine {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="/barista/">
+                <i class="bi bi-cup-hot-fill" style="font-size: 1.4rem; margin-right: 8px; background: linear-gradient(45deg, #d4af37, #ffd700, #ffed4e, #d4af37); background-size: 400% 400%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; animation: brandShine 4s ease-in-out infinite; filter: drop-shadow(0 0 6px rgba(212, 175, 55, 0.5));"></i>Barista
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navMenu">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="/barista/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/barista/menu.html">Menu</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/barista/about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/barista/contact.html">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="/barista/gallery.html">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/barista/events.html">Events</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container text-center">
+            <h1 class="display-4 fw-bold mb-4">Gallery</h1>
+            <p class="lead text-secondary">Moments captured through the lens of coffee culture</p>
+        </div>
+    </section>
+
+    <!-- Gallery Categories -->
+    <section class="section-padding-sm">
+        <div class="container">
+            <nav class="gallery-nav text-center">
+                <button class="btn btn-outline-primary me-3 mb-2 filter-btn active" data-filter="all">All</button>
+                <button class="btn btn-outline-primary me-3 mb-2 filter-btn" data-filter="coffee">Coffee</button>
+                <button class="btn btn-outline-primary me-3 mb-2 filter-btn" data-filter="interior">Interior</button>
+                <button class="btn btn-outline-primary me-3 mb-2 filter-btn" data-filter="people">People</button>
+                <button class="btn btn-outline-primary mb-2 filter-btn" data-filter="events">Events</button>
+            </nav>
+        </div>
+    </section>
+
+    <!-- Gallery Grid -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="row g-4" id="galleryContainer">
+                <!-- Coffee Category -->
+                <div class="col-lg-4 col-md-6 gallery-item-wrapper" data-category="coffee">
+                    <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#galleryModal" data-category="coffee"
+                         data-src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                         data-title="Perfect Espresso" data-description="<p>The foundation of all great coffee drinks begins with the perfect espresso shot. Our skilled baristas extract each shot with precision timing and temperature control to achieve the ideal balance of sweetness, acidity, and body.</p><p><strong>Extraction Process:</strong></p><ul><li>18-20 gram dose of freshly ground coffee</li><li>25-30 second extraction time</li><li>9 bar pressure for optimal extraction</li><li>Water temperature between 195-205°F</li></ul><p>The result is a rich, golden crema topped espresso with complex flavors that form the base of our signature drinks.</p>">
+                        <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" 
+                             alt="Perfect Espresso" class="img-fluid">
+                        <div class="gallery-overlay">
+                            <div class="gallery-content">
+                                <h5>Perfect Espresso</h5>
+                                <p class="mb-0">The art of extraction</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 gallery-item-wrapper" data-category="coffee">
+                    <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#galleryModal" data-category="coffee"
+                         data-src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                         data-title="Premium Coffee Beans" data-description="<p>We source our premium coffee beans directly from sustainable farms around the world, ensuring fair trade practices and exceptional quality in every cup. Each origin brings unique characteristics to our diverse coffee selection.</p><p><strong>Featured Origins:</strong></p><ul><li>Ethiopian Highlands - Bright, floral notes with wine-like acidity</li><li>Colombian Supremo - Rich, full body with chocolate undertones</li><li>Guatemala Antigua - Spicy complexity with smoky finish</li><li>Costa Rican Tarrazú - Clean, bright with citrus notes</li></ul><p>Our roasting process highlights each bean's natural characteristics while maintaining consistency and freshness.</p>">
+                        <img src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" 
+                             alt="Coffee Beans" class="img-fluid">
+                        <div class="gallery-overlay">
+                            <div class="gallery-content">
+                                <h5>Premium Beans</h5>
+                                <p class="mb-0">Sourced globally</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 gallery-item-wrapper" data-category="coffee">
+                    <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#galleryModal" data-category="coffee"
+                         data-src="https://images.unsplash.com/photo-1559056199-641a0ac8b55e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                         data-title="Latte Art Mastery" data-description="<p>Latte art represents the perfect marriage of technical skill and creative expression. Our baristas transform simple milk and espresso into beautiful, Instagram-worthy creations that taste as good as they look.</p><p><strong>Popular Latte Art Designs:</strong></p><ul><li>Rosetta (Leaf) - The classic flowing leaf pattern</li><li>Heart - Simple yet elegant expression of love</li><li>Tulip - Multiple hearts creating a flower-like design</li><li>Swan - Advanced design showcasing technical mastery</li></ul><p>Each design requires perfect milk texture - smooth, glossy microfoam that integrates seamlessly with the espresso crema.</p>">
+                        <img src="https://images.unsplash.com/photo-1559056199-641a0ac8b55e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" 
+                             alt="Latte Art" class="img-fluid">
+                        <div class="gallery-overlay">
+                            <div class="gallery-content">
+                                <h5>Latte Art</h5>
+                                <p class="mb-0">Artistic perfection</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interior Category -->
+                <div class="col-lg-4 col-md-6 gallery-item-wrapper" data-category="interior">
+                    <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#galleryModal" data-category="interior"
+                         data-src="assets/img/interior/interior.jpg"
+                         data-title="Cozy Interior Design" data-description="<p>Our interior design creates a warm, welcoming atmosphere that balances industrial charm with cozy comfort. Every element has been carefully selected to enhance your coffee experience and provide a peaceful retreat from the bustling city.</p><p><strong>Design Elements:</strong></p><ul><li>Exposed brick walls for rustic charm</li><li>Edison bulb lighting for ambient warmth</li><li>Reclaimed wood furniture for sustainability</li><li>Living plants for natural air purification</li></ul><p>The space is designed to encourage both productivity and relaxation, whether you're working on your laptop or catching up with friends over coffee.</p>">
+                        <img src="assets/img/interior/interior.jpg" 
+                             alt="Coffee Shop Interior" class="img-fluid">
+                        <div class="gallery-overlay">
+                            <div class="gallery-content">
+                                <h5>Cozy Interior</h5>
+                                <p class="mb-0">Warm atmosphere</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 gallery-item-wrapper" data-category="interior">
+                    <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#galleryModal" data-category="interior"
+                         data-src="assets/img/interior/seatingarea.mp4" data-type="video"
+                         data-title="Comfortable Seating Areas" data-description="<p>Our thoughtfully arranged seating areas cater to different needs and preferences. From intimate two-person tables to larger community seating, we've created spaces that foster both conversation and contemplation.</p><p><strong>Seating Options:</strong></p><ul><li>Window-side counter seating with city views</li><li>Plush armchairs for relaxed coffee sessions</li><li>Communal tables for collaborative work</li><li>Quiet corner nooks for reading and reflection</li></ul><p>Each area is equipped with convenient power outlets and designed with optimal lighting for both daytime productivity and evening ambiance.</p>">
+                        <video class="img-fluid" style="width: 100%; height: 250px; object-fit: cover;" muted loop autoplay>
+                            <source src="assets/img/interior/seatingarea.mp4" type="video/mp4">
+                            <img src="assets/img/interior/interior.jpg" alt="Seating Area" class="img-fluid">
+                        </video>
+                        <div class="gallery-overlay">
+                            <div class="gallery-content">
+                                <h5>Seating Area</h5>
+                                <p class="mb-0">Comfortable spaces</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 gallery-item-wrapper" data-category="interior">
+                    <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#galleryModal" data-category="interior"
+                         data-src="assets/img/interior/coffeecounter.jpg"
+                         data-title="Coffee Counter & Bar" data-description="<p>The heart of our operation lies at our custom-designed coffee counter, where skilled baristas craft each drink with precision and care. This is where the magic happens - from bean to cup, every step is visible to our customers.</p><p><strong>Counter Features:</strong></p><ul><li>Professional La Marzocco espresso machine</li><li>Temperature-controlled grinder stations</li><li>Digital scales for precise measurements</li><li>Display case featuring fresh pastries and treats</li></ul><p>The open layout allows customers to watch the coffee-making process, creating an interactive experience that showcases our commitment to quality and craftsmanship.</p>">
+                        <img src="assets/img/interior/coffeecounter.jpg" 
+                             alt="Coffee Counter" class="img-fluid">
+                        <div class="gallery-overlay">
+                            <div class="gallery-content">
+                                <h5>Coffee Counter</h5>
+                                <p class="mb-0">Where magic happens</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- People Category -->
+                <div class="col-lg-4 col-md-6 gallery-item-wrapper" data-category="people">
+                    <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#galleryModal"
+                         data-src="assets/img/people/masterbarista.jpg" data-category="people"
+                         data-title="Master Barista" data-description="<p>Meet our head barista, a skilled artisan with over 8 years of experience in the coffee industry. With a passion for perfection, they have mastered the art of espresso extraction, milk steaming, and latte art.</p><p><strong>Specialties:</strong></p><ul><li>Precision espresso brewing</li><li>Advanced latte art techniques</li><li>Coffee bean sourcing and quality control</li><li>Training and mentoring junior baristas</li></ul><p>Their dedication to craftsmanship ensures every cup served meets our highest standards of excellence.</p>">
+                        <img src="assets/img/people/masterbarista.jpg" 
+                             alt="Master Barista" class="img-fluid">
+                        <div class="gallery-overlay">
+                            <div class="gallery-content">
+                                <h5>Master Barista</h5>
+                                <p class="mb-0">Skilled craftsmanship</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 gallery-item-wrapper" data-category="people">
+                    <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#galleryModal"
+                         data-src="assets/img/people/capturingmoments.jpg" data-category="people"
+                         data-title="Capturing Coffee Moments" data-description="<p>Every cup tells a story, and every moment shared over coffee creates lasting memories. This image captures the essence of what makes our coffee shop special - the human connections and shared experiences.</p><p><strong>What Makes These Moments Special:</strong></p><ul><li>Intimate conversations over perfectly brewed coffee</li><li>Business meetings that turn into friendships</li><li>Study sessions fueled by our specialty blends</li><li>First dates, celebrations, and life's milestones</li></ul><p>We believe that great coffee creates great conversations, and our space provides the perfect backdrop for life's important moments.</p>">
+                        <img src="assets/img/people/capturingmoments.jpg" 
+                             alt="Capturing Coffee Moments" class="img-fluid">
+                        <div class="gallery-overlay">
+                            <div class="gallery-content">
+                                <h5>Capturing Moments</h5>
+                                <p class="mb-0">Shared experiences</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 gallery-item-wrapper" data-category="people">
+                    <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#galleryModal"
+                         data-src="assets/img/people/coffeeculture1.jpg" data-category="people"
+                         data-title="Coffee Culture Community" data-description="<p>Coffee culture is more than just a beverage preference - it's a way of life that brings people together from all walks of life. Our café serves as a cultural hub where relationships are built and ideas are shared.</p><p><strong>Our Community Values:</strong></p><ul><li>Inclusivity and welcoming atmosphere for everyone</li><li>Supporting local artists and musicians</li><li>Hosting educational workshops and coffee tastings</li><li>Creating a space for meaningful conversations</li></ul><p>Whether you're a coffee connoisseur or just beginning your journey, our community embraces all levels of coffee appreciation and encourages exploration and learning.</p>">
+                        <img src="assets/img/people/coffeeculture1.jpg" 
+                             alt="Coffee Culture Community" class="img-fluid">
+                        <div class="gallery-overlay">
+                            <div class="gallery-content">
+                                <h5>Coffee Culture</h5>
+                                <p class="mb-0">Community building</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Events Category -->
+                <div class="col-lg-4 col-md-6 gallery-item-wrapper" data-category="events">
+                    <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#galleryModal" data-category="events"
+                         data-src="assets/img/events/coffeecupping.jpg"
+                         data-title="Coffee Cupping Experience" data-description="<p>Join our professional coffee cupping sessions to develop your palate and discover the intricate flavors and aromas that make each coffee unique. This immersive experience teaches you to taste coffee like a professional.</p><p><strong>What You'll Experience:</strong></p><ul><li>Guided tasting of 6 different single-origin coffees</li><li>Learn professional cupping protocols and techniques</li><li>Understanding flavor wheels and coffee vocabulary</li><li>Exploration of terroir and processing methods</li></ul><p>Perfect for coffee enthusiasts wanting to deepen their appreciation and understanding of specialty coffee. Sessions are held every Friday from 3:00 PM to 5:00 PM.</p>">
+                        <img src="assets/img/events/coffeecupping.jpg" 
+                             alt="Coffee Cupping" class="img-fluid">
+                        <div class="gallery-overlay">
+                            <div class="gallery-content">
+                                <h5>Coffee Cupping</h5>
+                                <p class="mb-0">Tasting sessions</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 gallery-item-wrapper" data-category="events">
+                    <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#galleryModal" data-category="events"
+                         data-src="assets/img/events/baristatraining.jpg"
+                         data-title="Professional Barista Training" data-description="<p>Elevate your coffee skills with our comprehensive barista training program. Learn from certified coffee professionals and master the techniques that make exceptional espresso-based beverages.</p><p><strong>Training Curriculum:</strong></p><ul><li>Espresso extraction theory and practice</li><li>Milk steaming and texturing techniques</li><li>Latte art fundamentals and advanced patterns</li><li>Coffee equipment maintenance and calibration</li></ul><p>Our 4-hour intensive course provides hands-on experience with professional equipment and personalized feedback from expert instructors. Perfect for aspiring baristas or coffee shop owners.</p>">
+                        <img src="assets/img/events/baristatraining.jpg" 
+                             alt="Barista Training" class="img-fluid">
+                        <div class="gallery-overlay">
+                            <div class="gallery-content">
+                                <h5>Barista Training</h5>
+                                <p class="mb-0">Learning the craft</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 gallery-item-wrapper" data-category="events">
+                    <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#galleryModal" data-category="events"
+                         data-src="assets/img/events/coffeeworkshop.jpg"
+                         data-title="Hands-on Coffee Workshop" data-description="<p>Immerse yourself in the world of specialty coffee with our interactive workshops. Learn various brewing methods and discover which techniques work best for different coffee beans and your personal taste preferences.</p><p><strong>Workshop Highlights:</strong></p><ul><li>Pour-over techniques (V60, Chemex, Kalita Wave)</li><li>French Press and Cold Brew methods</li><li>Understanding grind size and water temperature</li><li>Bean-to-cup ratio optimization for home brewing</li></ul><p>Each 3-hour session includes hands-on practice with professional equipment, take-home brewing guides, and coffee samples. Workshops are held every Sunday from 2:00 PM to 5:00 PM.</p>">
+                        <img src="assets/img/events/coffeeworkshop.jpg" 
+                             alt="Coffee Workshop" class="img-fluid">
+                        <div class="gallery-overlay">
+                            <div class="gallery-content">
+                                <h5>Coffee Workshop</h5>
+                                <p class="mb-0">Hands-on learning</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Modal -->
+    <div class="modal fade" id="galleryModal" tabindex="-1" aria-labelledby="galleryModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="galleryModalLabel">Gallery Image</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <!-- Default Layout for Non-People Images -->
+                <div class="modal-body p-0" id="defaultModalBody">
+                    <img src="" alt="" class="img-fluid w-100" id="modalImage">
+                    <div class="p-3">
+                        <h6 id="modalTitle"></h6>
+                        <p class="text-secondary mb-0" id="modalDescription"></p>
+                    </div>
+                </div>
+                <!-- People Layout - Side by Side -->
+                <div class="modal-body p-0 d-none" id="peopleModalBody">
+                    <div class="row g-0">
+                        <div class="col-md-6">
+                            <img src="" alt="" class="img-fluid h-100 w-100" id="peopleModalImage" style="object-fit: cover; min-height: 400px;">
+                        </div>
+                        <div class="col-md-6 d-flex align-items-center">
+                            <div class="p-4">
+                                <h4 class="text-warning mb-3" id="peopleModalTitle"></h4>
+                                <div class="text-secondary" id="peopleModalDescription"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="site-footer section-padding">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <div class="footer-brand">
+                        <h4 class="mb-3">Barista</h4>
+                        <p class="text-secondary">Crafting exceptional coffee experiences since 2010. Join our community for events, tastings, and coffee education.</p>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <h6 class="footer-title">Menu</h6>
+                    <ul class="footer-links">
+                        <li><a href="/barista/menu.html#espresso">Espresso</a></li>
+                        <li><a href="/barista/menu.html#specialty">Specialty Drinks</a></li>
+                        <li><a href="/barista/menu.html#pastries">Pastries</a></li>
+                        <li><a href="/barista/menu.html#beans">Coffee Beans</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2">
+                    <h6 class="footer-title">Company</h6>
+                    <ul class="footer-links">
+                        <li><a href="/barista/about.html">About Us</a></li>
+                        <li><a href="/barista/contact.html">Contact</a></li>
+                        <li><a href="/barista/gallery.html">Gallery</a></li>
+                        <li><a href="#">Careers</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <h6 class="footer-title">Stay Connected</h6>
+                    <p class="text-secondary small mb-3">Subscribe to our newsletter for the latest updates and offers.</p>
+                    <form class="newsletter-form mb-3" id="newsletterForm" action="https://formspree.io/f/mldwagay" method="POST">
+                        <div class="input-group">
+                            <input type="email" class="form-control" name="email" placeholder="Your email address" required>
+                            <button class="btn btn-primary" type="submit">Subscribe</button>
+                        </div>
+                        <!-- Hidden fields for form identification -->
+                        <input type="hidden" name="_subject" value="Newsletter Subscription - Barista Coffee">
+                        <input type="hidden" name="formType" value="newsletter">
+                    </form>
+                    <div class="social-links">
+                        <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                        <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="footer-divider">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="copyright-text">© <span id="year"></span> Barista Coffee House. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <div class="footer-legal">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+        
+        // Gallery filtering
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const galleryItems = document.querySelectorAll('.gallery-item-wrapper');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const filter = this.getAttribute('data-filter');
+                    
+                    // Update active button
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Filter gallery items
+                    galleryItems.forEach(item => {
+                        if (filter === 'all' || item.getAttribute('data-category') === filter) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+            
+            // Gallery modal
+            const galleryModal = document.getElementById('galleryModal');
+            const modalImage = document.getElementById('modalImage');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalDescription = document.getElementById('modalDescription');
+            
+            // People modal elements
+            const defaultModalBody = document.getElementById('defaultModalBody');
+            const peopleModalBody = document.getElementById('peopleModalBody');
+            const peopleModalImage = document.getElementById('peopleModalImage');
+            const peopleModalTitle = document.getElementById('peopleModalTitle');
+            const peopleModalDescription = document.getElementById('peopleModalDescription');
+            
+            document.querySelectorAll('.gallery-item[data-bs-toggle="modal"]').forEach(item => {
+                item.addEventListener('click', function() {
+                    const src = this.getAttribute('data-src');
+                    const title = this.getAttribute('data-title');
+                    const description = this.getAttribute('data-description');
+                    const category = this.getAttribute('data-category');
+                    const mediaType = this.getAttribute('data-type');
+                    
+                    // Always use the side-by-side layout for all gallery items
+                    defaultModalBody.classList.add('d-none');
+                    peopleModalBody.classList.remove('d-none');
+                    
+                    // Check if it's a video or image
+                    const imageContainer = peopleModalImage.parentElement;
+                    
+                    // Remove any existing video elements
+                    const existingVideo = imageContainer.querySelector('video');
+                    if (existingVideo) {
+                        existingVideo.remove();
+                    }
+                    
+                    if (mediaType === 'video' || src.endsWith('.mp4') || src.endsWith('.webm') || src.endsWith('.ogg')) {
+                        // Hide the image and create video element
+                        peopleModalImage.style.display = 'none';
+                        
+                        const video = document.createElement('video');
+                        video.className = 'img-fluid';
+                        video.style.width = '100%';
+                        video.style.height = '100%';
+                        video.style.objectFit = 'cover';
+                        video.controls = true;
+                        video.autoplay = true;
+                        video.loop = true;
+                        video.muted = true;
+                        
+                        const source = document.createElement('source');
+                        source.src = src;
+                        source.type = 'video/mp4';
+                        
+                        video.appendChild(source);
+                        imageContainer.appendChild(video);
+                    } else {
+                        // Show the image and hide any video
+                        peopleModalImage.style.display = 'block';
+                        peopleModalImage.src = src;
+                        peopleModalImage.alt = title;
+                    }
+                    
+                    peopleModalTitle.textContent = title;
+                    peopleModalDescription.innerHTML = description;
+                });
+            });
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>

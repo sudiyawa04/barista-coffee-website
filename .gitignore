@@ -1,0 +1,38 @@
+# Ignore temporary files
+*.tmp
+*.log
+*~
+
+# Ignore IDE/Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Ignore OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Ignore backup files
+*.bak
+*.backup
+
+# Ignore PowerShell scripts (optional - remove if you want to include them)
+*.ps1
+
+# Ignore empty placeholder files
+*-new.html
+simple-test.html
+formspree-test.html
+
+# Node modules (if any)
+node_modules/
+
+# Logs
+logs/
+storage/

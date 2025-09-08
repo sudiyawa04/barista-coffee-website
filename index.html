@@ -1,0 +1,527 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Barista - Dark Home</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="assets/css/dark-style.css">
+    <style>
+        /* Ensure slideshow works immediately */
+        .hero-slideshow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        .hero-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 2s ease-in-out;
+        }
+        .hero-slide.active {
+            opacity: 1;
+        }
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.5));
+            z-index: 2;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 3;
+        }
+        .hero-section {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            color: white;
+            text-align: center;
+            overflow: hidden;
+        }
+        
+        /* Coffee Culture Slideshow Styles */
+        .culture-slideshow-container {
+            position: relative;
+        }
+        
+        .culture-image-display {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        .culture-main-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        
+        .culture-main-image.active {
+            opacity: 1;
+        }
+        
+        .culture-thumbnails {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+        
+        .culture-thumb {
+            width: 80px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 8px;
+            cursor: pointer;
+            opacity: 0.6;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .culture-thumb.active,
+        .culture-thumb:hover {
+            opacity: 1;
+            border-color: #d4af37;
+            transform: scale(1.05);
+        }
+        
+        .culture-content {
+            padding-left: 30px;
+        }
+        
+        .culture-text {
+            display: none;
+        }
+        
+        .culture-text.active {
+            display: block;
+        }
+        
+        .text-gold {
+            color: #d4af37;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="/barista/">
+                <i class="bi bi-cup-hot-fill" style="font-size: 1.4rem; margin-right: 8px; background: linear-gradient(45deg, #d4af37, #ffd700, #ffed4e, #d4af37); background-size: 400% 400%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; animation: brandShine 4s ease-in-out infinite; filter: drop-shadow(0 0 6px rgba(212, 175, 55, 0.5));"></i>Barista
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navMenu">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="/barista/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/barista/menu.html">Menu</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/barista/about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/barista/contact.html">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/barista/gallery.html">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/barista/events.html">Events</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section with Natural Slideshow -->
+    <section class="hero-section">
+        <div class="hero-slideshow">
+            <div class="hero-slide active" style="background-image: url('https://images.unsplash.com/photo-1442512595331-e89e73853f31?w=1920&h=1080&fit=crop');"></div>
+            <div class="hero-slide" style="background-image: url('assets/img/hero/slide1.jpg');"></div>
+            <div class="hero-slide" style="background-image: url('assets/img/hero/slide2.jpg');"></div>
+            <div class="hero-slide" style="background-image: url('assets/img/hero/slide3.jpg');"></div>
+            <div class="hero-slide" style="background-image: url('assets/img/hero/slide4.jpg');"></div>
+            <div class="hero-slide" style="background-image: url('assets/img/hero/slide5.jpg');"></div>
+            <div class="hero-slide" style="background-image: url('assets/img/hero/slide6.jpg');"></div>
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 mx-auto">
+                        <h1 class="display-3 fw-bold mb-4">A PLACE OF TRANQUILITY</h1>
+                        <p class="lead mb-5">Discover the perfect blend of taste and atmosphere in our cozy coffee sanctuary.</p>
+                        <a href="#about" class="btn btn-gold">READ MORE</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="feature-card text-center">
+                        <i class="bi bi-cup-hot feature-icon"></i>
+                        <h5 class="mt-3">Ethically Sourced</h5>
+                        <p class="text-secondary">Partnering directly with farmers to ensure quality and fair trade practices.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card text-center">
+                        <i class="bi bi-fire feature-icon"></i>
+                        <h5 class="mt-3">Expertly Roasted</h5>
+                        <p class="text-secondary">Roasted in small batches for consistency and maximum flavor profile.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card text-center">
+                        <i class="bi bi-people feature-icon"></i>
+                        <h5 class="mt-3">Community First</h5>
+                        <p class="text-secondary">Building relationships one cup at a time in our welcoming space.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Coffee Grid Section -->
+    <section class="section-padding bg-dark-alt" id="coffee">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h2 class="display-5 fw-bold mb-4">Our Coffee Selection</h2>
+                    <p class="lead text-secondary">Handpicked beans from the world's finest coffee regions</p>
+                </div>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <div class="coffee-card">
+                        <div class="coffee-image">
+                            <img src="https://images.unsplash.com/photo-1610889556528-9a770e32642f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" 
+                                 alt="Ethiopia Yirgacheffe" class="img-fluid">
+                        </div>
+                        <div class="coffee-info">
+                            <h5>Ethiopia Yirgacheffe</h5>
+                            <p class="text-secondary small">Bright, floral notes with hints of citrus</p>
+                            <span class="coffee-price">KES 1,899</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="coffee-card">
+                        <div class="coffee-image">
+                            <img src="https://images.unsplash.com/photo-1559056199-641a0ac8b55e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" 
+                                 alt="Guatemala Antigua" class="img-fluid">
+                        </div>
+                        <div class="coffee-info">
+                            <h5>Guatemala Antigua</h5>
+                            <p class="text-secondary small">Full-bodied with chocolate undertones</p>
+                            <span class="coffee-price">KES 1,699</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="coffee-card">
+                        <div class="coffee-image">
+                            <img src="https://images.unsplash.com/photo-1610632380989-680fe40816c6?w=500&h=500&fit=crop" 
+                                 alt="Colombia Supremo" class="img-fluid">
+                        </div>
+                        <div class="coffee-info">
+                            <h5>Colombia Supremo</h5>
+                            <p class="text-secondary small">Balanced acidity with caramel sweetness</p>
+                            <span class="coffee-price">KES 1,599</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="coffee-card">
+                        <div class="coffee-image">
+                            <img src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" 
+                                 alt="Kenya AA" class="img-fluid">
+                        </div>
+                        <div class="coffee-info">
+                            <h5>Kenya AA</h5>
+                            <p class="text-secondary small">Wine-like acidity with berry notes</p>
+                            <span class="coffee-price">KES 1,999</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section-padding" id="about">
+        <div class="container">
+            <div class="row g-5 align-items-center">
+                <div class="col-lg-6">
+                    <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
+                         alt="About us" class="img-fluid rounded">
+                </div>
+                <div class="col-lg-6">
+                    <h2 class="display-5 fw-bold mb-4">Our Story</h2>
+                    <p class="lead text-secondary mb-4">
+                        From humble beginnings to exceptional brews, our journey has been about perfecting the art of coffee.
+                    </p>
+                    <p class="text-secondary mb-4">
+                        We source the finest beans from around the world and roast them to perfection, creating unique flavor profiles that have become the signature of our brand. Every cup tells a story of passion, dedication, and the pursuit of excellence.
+                    </p>
+                    <a href="/barista/about.html" class="btn btn-outline-primary">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Coffee Culture Section -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h2 class="display-5 fw-bold mb-4">Coffee Culture</h2>
+                    <p class="lead text-secondary">Discover the stories behind every cup and the community that coffee creates</p>
+                </div>
+            </div>
+            
+            <div class="row align-items-center">
+                <!-- Coffee Culture Images -->
+                <div class="col-lg-6">
+                    <div class="culture-slideshow-container">
+                        <div class="culture-image-display" id="cultureImageDisplay">
+                            <img src="assets/img/people/coffeeculture1.jpg" alt="Coffee Culture" class="culture-main-image active" data-culture="culture1">
+                            <img src="assets/img/people/coffeeculture2.jpg" alt="Coffee Culture" class="culture-main-image" data-culture="culture2">
+                        </div>
+                        
+                        <!-- Thumbnail Navigation -->
+                        <div class="culture-thumbnails mt-3">
+                            <img src="assets/img/people/coffeeculture1.jpg" alt="Culture 1" class="culture-thumb active" data-target="culture1">
+                            <img src="assets/img/people/coffeeculture2.jpg" alt="Culture 2" class="culture-thumb" data-target="culture2">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Culture Content -->
+                <div class="col-lg-6">
+                    <div class="culture-content">
+                        <!-- Culture 1 Content -->
+                        <div class="culture-text active" id="culture1-text">
+                            <h3 class="text-gold mb-3">The Art of Coffee Making</h3>
+                            <p class="text-secondary mb-4">
+                                Coffee is more than just a beverage - it's a ritual, an art form, and a way of life. 
+                                Every morning, millions of people around the world begin their day with the perfect cup, 
+                                each with their own unique preferences and brewing methods.
+                            </p>
+                            <p class="text-secondary mb-4">
+                                From the careful selection of beans to the precise timing of extraction, 
+                                every step in the coffee-making process contributes to the final experience. 
+                                Our baristas dedicate years to mastering these techniques, ensuring that each cup 
+                                tells a story of craftsmanship and passion.
+                            </p>
+                            <ul class="text-secondary">
+                                <li>Expert bean selection from sustainable sources</li>
+                                <li>Precision grinding for optimal extraction</li>
+                                <li>Temperature control for perfect brewing</li>
+                                <li>Artisan milk steaming techniques</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Culture 2 Content -->
+                        <div class="culture-text" id="culture2-text">
+                            <h3 class="text-gold mb-3">Community & Connection</h3>
+                            <p class="text-secondary mb-4">
+                                Coffee shops have always been more than places to grab a quick drink - they're 
+                                community hubs where relationships are built, ideas are shared, and memories are made. 
+                                The coffee culture brings people together from all walks of life.
+                            </p>
+                            <p class="text-secondary mb-4">
+                                Whether it's a business meeting, a catch-up with friends, or a quiet moment of solitude, 
+                                our space provides the perfect backdrop for life's important moments. 
+                                We believe that great coffee creates great conversations.
+                            </p>
+                            <ul class="text-secondary">
+                                <li>Welcoming atmosphere for all ages</li>
+                                <li>Community events and coffee tastings</li>
+                                <li>Local artist showcases and exhibitions</li>
+                                <li>Educational workshops and brewing classes</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Preview Section -->
+    <section class="section-padding bg-dark-alt">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h2 class="display-5 fw-bold mb-4">Experience Our Space</h2>
+                    <p class="lead text-secondary">A glimpse into our cozy coffee sanctuary</p>
+                </div>
+            </div>
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <div class="gallery-item">
+                        <img src="assets/img/interior/interior.jpg" 
+                             alt="Coffee shop interior" class="img-fluid rounded">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="gallery-item">
+                        <img src="assets/img/interior/coffeecounter.jpg" 
+                             alt="Coffee counter setup" class="img-fluid rounded">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="gallery-item">
+                        <video class="img-fluid rounded" style="width: 100%; height: 250px; object-fit: cover;" muted loop autoplay>
+                            <source src="assets/img/interior/seatingarea.mp4" type="video/mp4">
+                            <img src="assets/img/interior/interior.jpg" alt="Seating area" class="img-fluid rounded">
+                        </video>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <a href="/barista/gallery.html" class="btn btn-outline-primary">View Full Gallery</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer section-padding">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <div class="footer-brand">
+                        <h4 class="mb-3">Barista</h4>
+                        <p class="text-secondary">Crafting exceptional coffee experiences since 2010. Join our community for events, tastings, and coffee education.</p>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <h6 class="footer-title">Menu</h6>
+                    <ul class="footer-links">
+                        <li><a href="/barista/menu.html#espresso">Espresso</a></li>
+                        <li><a href="/barista/menu.html#specialty">Specialty Drinks</a></li>
+                        <li><a href="/barista/menu.html#pastries">Pastries</a></li>
+                        <li><a href="/barista/menu.html#beans">Coffee Beans</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2">
+                    <h6 class="footer-title">Company</h6>
+                    <ul class="footer-links">
+                        <li><a href="/barista/about.html">About Us</a></li>
+                        <li><a href="/barista/contact.html">Contact</a></li>
+                        <li><a href="/barista/gallery.html">Gallery</a></li>
+                        <li><a href="#">Careers</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <h6 class="footer-title">Stay Connected</h6>
+                    <p class="text-secondary small mb-3">Subscribe to our newsletter for the latest updates and offers.</p>
+                    <form class="newsletter-form mb-3" id="newsletterForm" action="https://formspree.io/f/mldwagay" method="POST">
+                        <div class="input-group">
+                            <input type="email" class="form-control" name="email" placeholder="Your email address" required>
+                            <button class="btn btn-primary" type="submit">Subscribe</button>
+                        </div>
+                        <!-- Hidden fields for form identification -->
+                        <input type="hidden" name="_subject" value="Newsletter Subscription - Barista Coffee">
+                        <input type="hidden" name="formType" value="newsletter">
+                    </form>
+                    <div class="social-links">
+                        <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                        <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="footer-divider">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="copyright-text">© <span id="year"></span> Barista Coffee House. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <div class="footer-legal">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+        
+        // Simple slideshow function
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.hero-slide');
+            let currentSlide = 0;
+            
+            function showNextSlide() {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add('active');
+            }
+            
+            // Change slide every 5 seconds
+            setInterval(showNextSlide, 5000);
+            
+            // Coffee Culture Slideshow
+            const cultureThumbs = document.querySelectorAll('.culture-thumb');
+            const cultureImages = document.querySelectorAll('.culture-main-image');
+            const cultureTexts = document.querySelectorAll('.culture-text');
+            
+            cultureThumbs.forEach(thumb => {
+                thumb.addEventListener('click', function() {
+                    const target = this.getAttribute('data-target');
+                    
+                    // Remove active class from all thumbnails
+                    cultureThumbs.forEach(t => t.classList.remove('active'));
+                    // Add active class to clicked thumbnail
+                    this.classList.add('active');
+                    
+                    // Hide all images
+                    cultureImages.forEach(img => img.classList.remove('active'));
+                    // Show target image
+                    const targetImage = document.querySelector(`[data-culture="${target}"]`);
+                    if (targetImage) {
+                        targetImage.classList.add('active');
+                    }
+                    
+                    // Hide all text content
+                    cultureTexts.forEach(text => text.classList.remove('active'));
+                    // Show target text
+                    const targetText = document.getElementById(`${target}-text`);
+                    if (targetText) {
+                        targetText.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
