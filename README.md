@@ -1,10 +1,4 @@
-Barista Dark Home - Mirror of Qode Interactive
-===============================================
-
-This project is a recreated version of the dark home page from https://barista.qodeinteractive.com/elementor/dark-home/
-
-## What's Been Updated
-
+Barista 
 ### Main Files
 - `index.html` - Updated to mirror the dark home design
 - `dark-home.html` - Standalone dark home page 
