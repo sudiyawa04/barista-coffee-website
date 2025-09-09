@@ -1,5 +1,20 @@
 // Natural Hero Slideshow with Eye-Catching Transitions
 document.addEventListener('DOMContentLoaded', function() {
+    // Performance optimization: Use requestAnimationFrame for smooth animations
+    function rafPolyfill() {
+        let lastTime = 0;
+        if (!window.requestAnimationFrame) {
+            window.requestAnimationFrame = function(callback) {
+                const currTime = new Date().getTime();
+                const timeToCall = Math.max(0, 16 - (currTime - lastTime));
+                const id = window.setTimeout(function() { callback(currTime + timeToCall); }, timeToCall);
+                lastTime = currTime + timeToCall;
+                return id;
+            };
+        }
+    }
+    rafPolyfill();
+    
     const slides = document.querySelectorAll('.hero-slide');
     if (slides.length === 0) return;
     
@@ -7,22 +22,25 @@ document.addEventListener('DOMContentLoaded', function() {
     const slideCount = slides.length;
     
     function nextSlide() {
-        // Add fade-out class to current slide
-        slides[currentSlide].classList.add('fade-out');
-        slides[currentSlide].classList.remove('active');
-        
-        // Move to next slide
-        currentSlide = (currentSlide + 1) % slideCount;
-        
-        // Add active class to new slide with delay for smooth transition
-        setTimeout(() => {
-            slides.forEach((slide, index) => {
-                slide.classList.remove('fade-out', 'active');
-                if (index === currentSlide) {
-                    slide.classList.add('active');
-                }
-            });
-        }, 100);
+        // Use requestAnimationFrame for smooth transitions
+        requestAnimationFrame(() => {
+            // Add fade-out class to current slide
+            slides[currentSlide].classList.add('fade-out');
+            slides[currentSlide].classList.remove('active');
+            
+            // Move to next slide
+            currentSlide = (currentSlide + 1) % slideCount;
+            
+            // Add active class to new slide with delay for smooth transition
+            setTimeout(() => {
+                slides.forEach((slide, index) => {
+                    slide.classList.remove('fade-out', 'active');
+                    if (index === currentSlide) {
+                        slide.classList.add('active');
+                    }
+                });
+            }, 100);
+        });
     }
     
     // Start natural slideshow - change every 6 seconds for comfortable viewing
@@ -30,10 +48,14 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Add subtle zoom animation on load
     setTimeout(() => {
-        slides[0].style.transform = 'scale(1.02)';
-        setTimeout(() => {
-            slides[0].style.transform = 'scale(1)';
-        }, 3000);
+        requestAnimationFrame(() => {
+            slides[0].style.transform = 'scale(1.02)';
+            setTimeout(() => {
+                requestAnimationFrame(() => {
+                    slides[0].style.transform = 'scale(1)';
+                });
+            }, 3000);
+        });
     }, 1000);
 });
 

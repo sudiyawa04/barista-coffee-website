@@ -1,4 +1,13 @@
 /* Dark Theme for Barista - Mirror of qodeinteractive dark home */
+/* Performance optimizations */
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
 body { 
     background: #1a1a1a; 
     color: #e8e3d8; 
@@ -6,6 +15,23 @@ body {
     line-height: 1.6;
     margin: 0;
     padding: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Optimize images for faster loading */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* GPU acceleration for animations */
+.hero-slide,
+.team-photo,
+.gallery-item img {
+    transform: translateZ(0);
+    will-change: transform;
 }
 
 /* Dark sections with consistent spacing */
