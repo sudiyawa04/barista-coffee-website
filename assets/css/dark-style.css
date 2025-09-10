@@ -210,27 +210,78 @@ section {
 
 /* Gold button styling */
 .btn-gold {
-    background: #d4af37;
-    border: 2px solid #d4af37;
-    color: #1a1a1a;
-    font-weight: 600;
-    padding: 12px 30px;
-    border-radius: 30px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    transition: all 0.3s ease;
-    text-decoration: none;
+    background: #d4af37 !important;
+    border: 2px solid #d4af37 !important;
+    color: #1a1a1a !important;
+    font-weight: 600 !important;
+    padding: 12px 30px !important;
+    border-radius: 30px !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+    transition: all 0.3s ease !important;
+    text-decoration: none !important;
 }
 
 .btn-gold:hover {
-    background: transparent;
-    color: #d4af37;
-    text-decoration: none;
+    background: transparent !important;
+    color: #d4af37 !important;
+    border-color: #d4af37 !important;
+    text-decoration: none !important;
+}
+
+.btn-gold:focus, .btn-gold:active {
+    background: #d4af37 !important;
+    color: #1a1a1a !important;
+    border-color: #d4af37 !important;
+    box-shadow: 0 0 0 0.2rem rgba(212, 175, 55, 0.25) !important;
 }
 
 .btn-gold.btn-sm {
-    padding: 8px 20px;
-    font-size: 0.85rem;
+    padding: 8px 20px !important;
+    font-size: 0.85rem !important;
+}
+
+/* Golden outline button for special cases */
+.btn-outline-gold {
+    background: transparent !important;
+    border: 2px solid #d4af37 !important;
+    color: #d4af37 !important;
+    font-weight: 600 !important;
+    padding: 12px 30px !important;
+    border-radius: 30px !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+    transition: all 0.3s ease !important;
+    text-decoration: none !important;
+}
+
+.btn-outline-gold:hover {
+    background: #d4af37 !important;
+    color: #1a1a1a !important;
+    border-color: #d4af37 !important;
+    text-decoration: none !important;
+}
+
+/* Override any Bootstrap button styles that might interfere */
+.btn-gold, 
+.btn-gold:hover, 
+.btn-gold:focus, 
+.btn-gold:active,
+.btn-gold.active {
+    background: #d4af37 !important;
+    border-color: #d4af37 !important;
+    color: #1a1a1a !important;
+}
+
+.btn-gold:hover {
+    background: transparent !important;
+    color: #d4af37 !important;
+}
+
+/* Ensure button focus states work properly */
+.btn-gold:focus, 
+.btn-gold.focus {
+    box-shadow: 0 0 0 0.2rem rgba(212, 175, 55, 0.25) !important;
 }
 
 /* Gallery items with overlay effects */
